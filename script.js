@@ -9,6 +9,7 @@ const score1El = document.getElementById("score--1");
 const currentScore0El = document.querySelector("#current--0");
 const currentScore1El = document.querySelector("#current--1");
 const scoreMessageEl = document.querySelector(".scoreMessage");
+const resultMessageEl = document.querySelector(".resultMessage");
 const dice1El = document.querySelector(".dice1");
 const dice2El = document.querySelector(".dice2");
 const player0El = document.querySelector(".player--0");
@@ -39,6 +40,7 @@ const setupGame = function () {
   dice1El.classList.add("hidden");
   dice2El.classList.add("hidden");
   scoreMessageEl.textContent = "";
+  resultMessageEl.textContent = "";
 
   currentScore = 0;
 
@@ -252,12 +254,14 @@ btnRoll.addEventListener("click", function () {
       dice2El.src = `pig-${pig2}.png`;
       let result = pigScore(pig1, pig2);
       scoreMessageEl.textContent = pigMessage;
+      resultMessageEl.textContent = `${result} points!`;
       console.log(result);
       if (result != 0) {
         currentScore = currentScore + result;
         console.log(`Current Score ${currentScore}`);
         setScore(currentScore);
       } else {
+        resultMessageEl.textContent = "Sorry you lose your points this turn!";
         currentScore = 0;
         setScore(currentScore);
         switchPlayer();
